@@ -1,0 +1,99 @@
+ANS:1---
+Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null......
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast)
+            {
+                slow=head;
+                while(slow!=fast)
+                {
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:2--
+Given the head of a singly linked list, return the middle node of the linked list.
+
+If there are two middle nodes, return the second middle node.
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        if(head.next==null && head==null)
+        {
+            return null;
+        }
+        int countnodes=0;
+        ListNode temp=head;
+        while(temp!=null)
+        {
+            temp=temp.next;
+            countnodes++;
+        }
+        int n=(countnodes/2);
+        temp=head;
+        while(n!=0)
+        {
+            temp=temp.next;
+            n--;
+        }
+        return temp;
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:3--
+Given the head of a singly linked list, return true if it is a 
+palindrome
+ or false otherwise.
+class Solution {
+    public ListNode findmid(ListNode head)
+    {
+          ListNode slow=head;
+            ListNode fast=head;
+            while(fast!=null && fast.next!=null)
+            {
+                slow=slow.next;
+                fast=fast.next.next;
+            }
+            return slow;
+    }
+    public boolean isPalindrome(ListNode head) {
+        if(head == null && head.next!=null)
+        {
+            return true;
+        }
+        ListNode midnode =findmid(head);
+        ListNode prev=null;
+        ListNode curr=midnode;
+          ListNode next;
+          while(curr!=null)
+          {
+              next=curr.next;
+              curr.next=prev;
+              prev=curr;
+              curr=next;
+          }
+            ListNode right=prev;
+              ListNode left =head;
+              while(right!=null)
+              {
+                  if(left.val!=right.val){
+                      return false;
+                  }
+                  left=left.next;
+                  right=right.next;
+              }
+              return true;
+
+    }
+}
